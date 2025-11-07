@@ -26,27 +26,33 @@
 
 <div class="player">
 	<p class="player-steamname">{steamname}</p>
-	<p class="player-name">{name}</p>
 	<Card title={league} progress={rank} total={40000} />
 </div>
 
 <style>
 	.player-steamname {
-		font-size: 2rem;
-		font-weight: bold;
-		margin: 0.5rem 0 1.5rem 0;
-	}
-	.player-name {
 		font-size: 1.2rem;
-		color: rgb(94, 94, 94);
-		margin: 0;
+		font-weight: bold;
 	}
 	.player {
-		background-color: rgb(14, 14, 14);
-		padding: 2rem;
+		background-color: rgb(10, 10, 10);
+		border-radius: 2px;
+		padding: 2rem 2rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+	}
+
+	/* Larger screens (tablet/desktop) */
+	@media (min-width: 769px) {
+	.player-steamname {
+		font-size: 2rem;
+		margin: 0.5rem 0 1.5rem 0;
+	}
+	.player  {
+		width: 20vw;
+		padding: 2rem;
+	}
 	}
 </style>

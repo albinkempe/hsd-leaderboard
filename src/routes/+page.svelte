@@ -1,11 +1,13 @@
-<script>
+<script lang="ts">
 	import Player from '$lib/components/player.svelte';
 	import { onMount } from 'svelte';
 
-	/**
-	 * @type {any[] | null | undefined}
-	 */
-	let players = [];
+	interface PlayerData {
+		name: string;
+		steamname: string;
+	}
+
+	let players: PlayerData[] = [];
 
 	onMount(async () => {
 		try {
@@ -13,61 +15,75 @@
 				'https://api.the-finals-leaderboard.com/v1/leaderboard/s8worldtour/crossplay?clubTag=HSD'
 			);
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
 			const data = await res.json();
-			console.log(data.data);
-			players = data.data.map((/** @type {{ name: any; steamName: any; }} */ player) => ({
-				name: player.name,
-				steamname: player.steamName
-			}));
-			console.log(players);
+
+			players = data.data.map(
+				(player: { name: string; steamName: string }): PlayerData => ({
+					name: player.name,
+					steamname: player.steamName
+				})
+			);
 		} catch (err) {
 			console.error('Failed to fetch rank:', err);
 		}
 	});
+
+	$: sortedPlayers = [...players].sort((a, b) => a.steamname.localeCompare(b.steamname));
 </script>
 
 <main>
 	<div class="players">
-		{#each players as player}
+		{#each sortedPlayers as player}
 			<Player name={player.name} steamname={player.steamname} />
 		{/each}
 	</div>
 </main>
 
+
+
 <style>
 .players {
-  display: flex;
-  flex-direction: column; /* default for mobile */
-  justify-content: center;
-  align-items: center;
-  gap: 2rem; /* default gap for mobile */
-  flex-wrap: nowrap; /* optional */
-  height: 100%;
-  width: 100%;
-}
-
-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  width: 100vw;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  width: 90vw;
+}
+
+main {
+	width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+    font-family: monospace;
   color: white;
-  font-family: monospace;
   font-size: 2rem;
 }
 
 :global(body) {
   background-color: black;
+  overflow-x: hidden;
+  padding: 0;
+  margin: 0;
 }
 
-/* Larger screens (tablet/desktop) */
 @media (min-width: 769px) {
   .players {
-    flex-direction: row; /* switch to row for larger screens */
-    gap: 4rem; /* larger gap */
+    flex-direction: row;
+    gap: 4rem;
     flex-wrap: wrap;
+	 justify-content: center;
+  }
+
+  main {
+	justify-content: center;
+	height: 100vh;
   }
 }
 
