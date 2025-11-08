@@ -33,6 +33,7 @@
 </script>
 
 <main>
+	<h1>HSD Esports</h1>
 	<div class="players">
 		{#each sortedPlayers as player}
 			<Player name={player.name} steamname={player.steamname} />
@@ -41,15 +42,20 @@
 </main>
 
 <style>
+	h1 {
+		font-size: 2rem;
+		margin: 1.5rem 0 0.5rem 0;
+	}
+
 	.players {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
+		align-items: stretch;
 		gap: 2rem;
 		flex-wrap: nowrap;
-		margin-top: 2rem;
-		margin-bottom: 2rem;
+		margin-top: 1rem;
+		margin-bottom: 1rem;
 		width: 90vw;
 	}
 
@@ -72,11 +78,17 @@
 	}
 
 	@media (min-width: 769px) {
+		h1 {
+			font-size: 2rem;
+			margin: 2rem 0 3rem 0;
+		}
+
 		.players {
 			flex-direction: row;
 			gap: 4rem;
 			flex-wrap: wrap;
 			justify-content: center;
+			align-items: center;
 		}
 
 		main {

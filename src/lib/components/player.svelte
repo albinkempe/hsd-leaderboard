@@ -51,7 +51,7 @@
 	.player-steamname {
 		font-size: 1.5rem;
 		font-weight: bold;
-		margin: 0 0 1.5rem 0;
+		margin: 0 0 1rem 0;
 	}
 
 	@media (min-width: 769px) {
