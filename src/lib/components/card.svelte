@@ -1,19 +1,13 @@
 <script>
-	import { createEventDispatcher } from 'svelte';
-
 	export let title = 'Diamond 4';
 	export let progress = 90;
 	export let total = 100;
-
-	const dispatch = createEventDispatcher();
 
 	$: progressPercent = Math.min((progress / total) * 100, 100);
 	$: remaining = Math.max(total - progress, 0);
 	$: isComplete = progressPercent === 100;
 	$: progressColor = isComplete ? 'rgb(0, 123, 255)' : 'rgb(224, 88, 24)';
 
-	// Notify parent if completion changes
-	$: dispatch('completeChange', { complete: isComplete });
 </script>
 
 <div class="card">

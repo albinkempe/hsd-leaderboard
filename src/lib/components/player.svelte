@@ -4,10 +4,8 @@
 
 	export let name = 'turbo';
 	export let steamname = 'turbo#9840';
-	export let rank = 0;
+	export let progress = 0;
 	export let league = 'Diamond 4';
-
-	let isComplete = false;
 
 	onMount(async () => {
 		try {
@@ -17,24 +15,17 @@
 			);
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
 			const data = await res.json();
-			rank = data.data[0].rankScore;
+			progress = data.data[0].rankScore;
 			league = data.data[0].league;
 		} catch (err) {
 			console.error('Failed to fetch rank:', err);
 		}
 	});
-
-	/**
-	 * @param {{ detail: { complete: boolean; }; }} event
-	 */
-	function handleCompleteChange(event) {
-		isComplete = event.detail.complete;
-	}
 </script>
 
-<div class="player {isComplete ? 'complete' : ''}">
+<div class="player {progress >= 40000 ? 'complete' : ''}">
 	<p class="player-steamname">{steamname}</p>
-	<Card title={league} progress={rank} total={40000} on:completeChange={handleCompleteChange} />
+	<Card title={league} progress={progress} total={40000} />
 </div>
 
 <style>
