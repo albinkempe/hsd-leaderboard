@@ -47,7 +47,9 @@
 		flex-direction: column;
 		align-items: center;
 		border: 2px solid transparent;
-		transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+		transition:
+			border 0.3s ease-in-out,
+			box-shadow 0.3s ease-in-out;
 	}
 
 	.player.complete {

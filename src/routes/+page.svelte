@@ -40,51 +40,48 @@
 	</div>
 </main>
 
-
-
 <style>
-.players {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  flex-wrap: nowrap;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  width: 90vw;
-}
+	.players {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		gap: 2rem;
+		flex-wrap: nowrap;
+		margin-top: 2rem;
+		margin-bottom: 2rem;
+		width: 90vw;
+	}
 
-main {
-	width: 100vw;
-  display: flex;
-  flex-direction: column;
-  justify-content: start;
-  align-items: center;
-    font-family: monospace;
-  color: white;
-  font-size: 2rem;
-}
+	main {
+		width: 100vw;
+		display: flex;
+		flex-direction: column;
+		justify-content: start;
+		align-items: center;
+		font-family: monospace;
+		color: white;
+		font-size: 2rem;
+	}
 
-:global(body) {
-  background-color: black;
-  overflow-x: hidden;
-  padding: 0;
-  margin: 0;
-}
+	:global(body) {
+		background-color: black;
+		overflow-x: hidden;
+		padding: 0;
+		margin: 0;
+	}
 
-@media (min-width: 769px) {
-  .players {
-    flex-direction: row;
-    gap: 4rem;
-    flex-wrap: wrap;
-	 justify-content: center;
-  }
+	@media (min-width: 769px) {
+		.players {
+			flex-direction: row;
+			gap: 4rem;
+			flex-wrap: wrap;
+			justify-content: center;
+		}
 
-  main {
-	justify-content: center;
-	height: 100vh;
-  }
-}
-
+		main {
+			justify-content: center;
+			height: 100vh;
+		}
+	}
 </style>

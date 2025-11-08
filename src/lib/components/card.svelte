@@ -39,7 +39,9 @@
 		align-items: center;
 		border: 2px solid transparent;
 		border-radius: 10px;
-		transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+		transition:
+			border 0.3s ease-in-out,
+			box-shadow 0.3s ease-in-out;
 	}
 
 	.progress-bar {
@@ -54,7 +56,9 @@
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		transition: width 0.5s ease-in-out, background-color 0.3s ease-in-out;
+		transition:
+			width 0.5s ease-in-out,
+			background-color 0.3s ease-in-out;
 	}
 
 	.progress-text {
