@@ -25,14 +25,14 @@
 
 <div class="player {progress >= 40000 ? 'complete' : ''}">
 	<p class="player-steamname">{steamname}</p>
-	<Card title={league} progress={progress} total={40000} />
+	<Card title={league} {progress} total={40000} />
 </div>
 
 <style>
 	.player {
 		background-color: rgb(10, 10, 10);
 		border-radius: 3px;
-		padding: 2rem;
+		padding: 1rem 2rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
@@ -49,13 +49,15 @@
 	}
 
 	.player-steamname {
-		font-size: 1.2rem;
+		font-size: 1.5rem;
 		font-weight: bold;
+		margin: 0 0 1.5rem 0;
 	}
 
 	@media (min-width: 769px) {
 		.player {
 			width: 20vw;
+			padding: 2rem 2rem;
 		}
 
 		.player-steamname {

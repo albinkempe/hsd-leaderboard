@@ -7,7 +7,6 @@
 	$: remaining = Math.max(total - progress, 0);
 	$: isComplete = progressPercent === 100;
 	$: progressColor = isComplete ? 'rgb(0, 123, 255)' : 'rgb(224, 88, 24)';
-
 </script>
 
 <div class="card">
@@ -26,7 +25,7 @@
 
 <style>
 	.card {
-		padding: 0 1rem;
+		padding: 0;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
@@ -36,6 +35,11 @@
 		transition:
 			border 0.3s ease-in-out,
 			box-shadow 0.3s ease-in-out;
+	}
+
+	.card-title {
+		font-size: 1rem;
+		margin: 0 0 0.7rem 0;
 	}
 
 	.progress-bar {
@@ -64,6 +68,7 @@
 	.progress-difference {
 		font-size: 0.9rem;
 		margin-top: 0.7rem;
+		margin-bottom: 0;
 		color: rgb(224, 88, 24);
 	}
 </style>
