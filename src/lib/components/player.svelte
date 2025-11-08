@@ -7,6 +7,8 @@
 	export let rank = 0;
 	export let league = 'Diamond 4';
 
+	let isComplete = false;
+
 	onMount(async () => {
 		try {
 			const encodedName = encodeURIComponent(name);
@@ -15,44 +17,57 @@
 			);
 			if (!res.ok) throw new Error(`HTTP ${res.status}`);
 			const data = await res.json();
-			console.log(data.data[0].rankScore);
 			rank = data.data[0].rankScore;
 			league = data.data[0].league;
 		} catch (err) {
 			console.error('Failed to fetch rank:', err);
 		}
 	});
+
+	/**
+	 * @param {{ detail: { complete: boolean; }; }} event
+	 */
+	function handleCompleteChange(event) {
+		isComplete = event.detail.complete;
+	}
 </script>
 
-<div class="player">
+<div class="player {isComplete ? 'complete' : ''}">
 	<p class="player-steamname">{steamname}</p>
-	<Card title={league} progress={rank} total={40000} />
+	<Card title={league} progress={rank} total={40000} on:completeChange={handleCompleteChange} />
 </div>
 
 <style>
-	.player-steamname {
-		font-size: 1.2rem;
-		font-weight: bold;
-	}
 	.player {
 		background-color: rgb(10, 10, 10);
-		border-radius: 2px;
-		padding: 2rem 2rem;
+		border-radius: 3px;
+		padding: 2rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		border: 2px solid transparent;
+		transition: border 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 	}
 
-	/* Larger screens (tablet/desktop) */
-	@media (min-width: 769px) {
+	.player.complete {
+		border: 2px solid rgb(0, 123, 255);
+		box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+	}
+
 	.player-steamname {
-		font-size: 2rem;
-		margin: 0.5rem 0 1.5rem 0;
+		font-size: 1.2rem;
+		font-weight: bold;
 	}
-	.player  {
-		width: 20vw;
-		padding: 2rem;
-	}
+
+	@media (min-width: 769px) {
+		.player {
+			width: 20vw;
+		}
+
+		.player-steamname {
+			font-size: 2rem;
+			margin: 0.5rem 0 1.5rem 0;
+		}
 	}
 </style>
