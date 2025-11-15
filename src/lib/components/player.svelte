@@ -2,10 +2,13 @@
 	import { onMount } from 'svelte';
 	import Card from './card.svelte';
 
-	export let name = 'turbo';
-	export let steamname = 'turbo#9840';
+	export let name = '';
+	export let steamname = '';
 	export let progress = 0;
-	export let league = 'Diamond 4';
+	export let league = '';
+
+	export let step = 2500;
+	export let maxTotal = 47500;
 
 	onMount(async () => {
 		try {
@@ -21,11 +24,13 @@
 			console.error('Failed to fetch rank:', err);
 		}
 	});
+
+	$: total = Math.min(Math.max(Math.ceil(progress / step) * step, step), maxTotal);
 </script>
 
-<div class="player {progress >= 40000 ? 'complete' : ''}">
+<div class="player">
 	<p class="player-steamname">{steamname}</p>
-	<Card title={league} {progress} total={40000} />
+	<Card title={league} {progress} {total} />
 </div>
 
 <style>
@@ -41,11 +46,6 @@
 		transition:
 			border 0.3s ease-in-out,
 			box-shadow 0.3s ease-in-out;
-	}
-
-	.player.complete {
-		border: 2px solid rgb(0, 123, 255);
-		box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
 	}
 
 	.player-steamname {

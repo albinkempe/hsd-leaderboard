@@ -34,6 +34,7 @@
 
 <main>
 	<h1>HSD Esports</h1>
+	<h2>Players</h2>
 	<div class="players">
 		{#each sortedPlayers as player}
 			<Player name={player.name} steamname={player.steamname} />
@@ -45,6 +46,11 @@
 	h1 {
 		font-size: 2rem;
 		margin: 1.5rem 0 0.5rem 0;
+	}
+
+	h2 {
+		font-size: 1.4rem;
+		margin: 1rem 0 0.5rem 0;
 	}
 
 	.players {
@@ -80,7 +86,7 @@
 	@media (min-width: 769px) {
 		h1 {
 			font-size: 2rem;
-			margin: 2rem 0 3rem 0;
+			margin: 22rem 0 3rem 0;
 		}
 
 		.players {
@@ -92,7 +98,7 @@
 		}
 
 		main {
-			justify-content: center;
+			justify-content: start;
 			height: 100vh;
 		}
 	}
