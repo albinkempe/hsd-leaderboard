@@ -44,6 +44,15 @@
 
 	// progress bar color follows the rank color; keep a distinct color when completed if you prefer
 	$: progressColor = isComplete ? 'rgb(0, 123, 255)' : rankColor;
+
+	/**
+	 * @param {number} n
+	 */
+	function formatNumber(n) {
+        if (n == null || Number.isNaN(n)) return '';
+        const num = Math.round(n);
+        return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
 </script>
 
 <!-- ...existing code... -->
@@ -51,9 +60,8 @@
 	<p class="card-title">{title}</p>
 
 	<div class="progress-bar">
-		<div class="progress" style="width: {progressPercent}%; background-color: {progressColor};">
-			<p class="progress-text">{progress}/{total}</p>
-		</div>
+		<div class="progress" style="width: {progressPercent}%; background-color: {progressColor};"></div>
+		<p class="progress-text">{formatNumber(progress)} / {formatNumber(total)}</p>
 	</div>
 
 	<!-- show remaining points and next rank, or max notice when at top rank -->
@@ -87,27 +95,31 @@
 		margin: 0 0 0.7rem 0;
 	}
 
-	.progress-bar {
-		width: 200px;
-		height: 30px;
-		background-color: rgb(48, 48, 48);
-		overflow: hidden;
-		border-radius: 6px;
-	}
+.progress-bar {
+        width: 200px;
+        height: 30px;
+        background-color: rgb(48, 48, 48);
+        overflow: hidden;
+        border-radius: 6px;
+        position: relative;
+    }
 
-	.progress {
-		position: relative; /* required for pseudo-elements */
-		height: 100%;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		transition:
-			width 0.6s cubic-bezier(0.2, 0.9, 0.3, 1),
-			background-color 0.3s ease-in-out,
-			box-shadow 0.3s ease-in-out;
-		overflow: hidden; /* clip animations */
-		box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.35);
-	}
+    .progress {
+        position: absolute; /* keep fill behind the centered text */
+        left: 0;
+        top: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition:
+            width 0.6s cubic-bezier(0.2, 0.9, 0.3, 1),
+            background-color 0.3s ease-in-out,
+            box-shadow 0.3s ease-in-out;
+        overflow: hidden; /* clip animations */
+        box-shadow: inset 0 -2px 6px rgba(0, 0, 0, 0.35);
+        z-index: 1;
+    }
 
 	/* subtler shimmer: lower opacity, slower, narrower band */
 	.progress::before {
@@ -163,14 +175,39 @@
 		}
 	}
 
-	.progress-text {
-		color: white;
-		font-size: 1rem;
-		margin: 0;
-		/* keep text legible on bright highlights */
-		position: relative; /* stay above pseudo-elements */
-		z-index: 2;
-	}
+	@keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(6px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+.progress-text {
+        color: white;
+        font-size: 1rem;
+        margin: 0;
+
+        /* make the text span the whole bar and center with flexbox */
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+
+        /* animate after the progress width finishes (0.6s) */
+        animation: fadeInUp 320ms cubic-bezier(0.2,0.9,0.3,1) both;
+        animation-delay: 600ms; /* match width transition duration */
+
+        pointer-events: none;
+    }
 
 	.progress-difference {
 		font-size: 0.9rem;

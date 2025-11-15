@@ -35,14 +35,12 @@
 
 <style>
 	.player {
-		background-color: rgb(10, 10, 10);
-		border-radius: 3px;
+		background-color: black;
 		padding: 1rem 2rem;
 		text-align: center;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		border: 2px solid transparent;
 		transition:
 			border 0.3s ease-in-out,
 			box-shadow 0.3s ease-in-out;

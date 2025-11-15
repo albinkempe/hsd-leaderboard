@@ -44,13 +44,13 @@
 
 <style>
 	h1 {
-		font-size: 2rem;
-		margin: 1.5rem 0 0.5rem 0;
+		font-size: 1.2rem;
+		margin: 1rem 0 0.5rem 0;
 	}
 
 	h2 {
-		font-size: 1.4rem;
-		margin: 1rem 0 0.5rem 0;
+		font-size: 0.9rem;
+		margin: 0.5rem 0 0 0;
 	}
 
 	.players {
@@ -87,6 +87,11 @@
 		h1 {
 			font-size: 2rem;
 			margin: 22rem 0 3rem 0;
+		}
+
+		h2 {
+			font-size: 1.4rem;
+			margin: 1rem 0 0.5rem 0;
 		}
 
 		.players {
